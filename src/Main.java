@@ -24,6 +24,11 @@ public class Main{
         System.out.println("Высота конуса: " + cone.getHeight());
         System.out.println("Площадь поверхности конуса: " + cone.calculateSurfaceArea());
         System.out.println("Объем конуса: " + cone.calculateVolume());
+        Ellipse Ellipse = new Ellipse(5.0, 3.0);
+
+        // Выводим результаты
+        System.out.println("Площадь эллипса: " + Ellipse.calculateArea());
+        System.out.println("Периметр эллипса: " + Ellipse.calculatePerimeter());
 
     }
   
