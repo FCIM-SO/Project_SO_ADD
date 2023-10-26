@@ -1,2 +1,9 @@
-package PACKAGE_NAME;public class TimerTask {
+
+public class TimerTask {
+
+	public TimerTask(Object object) {
+		// TODO Auto-generated constructor stub
+	}
+
+	
 }
