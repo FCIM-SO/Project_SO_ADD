@@ -38,6 +38,33 @@ class Heap {
         return heap.isEmpty();
     }
 
+    private void heapifyUp() {
+        int currentIndex = heap.size() - 1;
+
+        while (hasParent(currentIndex) && getParent(currentIndex) < heap.get(currentIndex)) {
+            Collections.swap(heap, getParentIndex(currentIndex), currentIndex);
+            currentIndex = getParentIndex(currentIndex);
+        }
+    }
+
+    private void heapifyDown() {
+        int currentIndex = 0;
+
+        while (hasLeftChild(currentIndex)) {
+            int largestChildIndex = getLeftChildIndex(currentIndex);
+
+            if (hasRightChild(currentIndex) && getRightChild(currentIndex) > heap.get(largestChildIndex)) {
+                largestChildIndex = getRightChildIndex(currentIndex);
+            }
+
+            if (heap.get(currentIndex) < heap.get(largestChildIndex)) {
+                Collections.swap(heap, currentIndex, largestChildIndex);
+                currentIndex = largestChildIndex;
+            } else {
+                break;
+            }
+        }
+    }
     private boolean hasParent(int index) {
         return index > 0;
     }
