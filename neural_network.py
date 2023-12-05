@@ -96,3 +96,34 @@ class Network(object):
         for i in range(self.num_layers-1):
             self.weights[i]=self.weights[i]+(eta*tmp_w[i])#корректируем со скоростью
             self.biases[i]=self.biases[i]+(eta*tmp_b[i])
+
+    def backprop(self, x, y):#функция для передачи списка корректировки весов и б. для 1 тестового элемента
+
+        activation = x
+        activations = [x]#сохраняем в список входные данные
+
+        for b, w in zip(self.biases, self.weights):
+
+            activation = f(np.dot(w,activation) + b)
+            activations.append(activation)#по мере прямого распространения сохраняем значения на каждом весе
+
+      #находим ошибку на последнем слое
+        deltas = [y-activations[-1]]#сохраняем ее в список
+
+        for i in range(self.num_layers - 2, 0, -1):
+
+            error = np.dot(self.weights[i].T, deltas[-1]) * df(activations[i])#обратно распространяем ее и сохраняем дельту
+            deltas.append(error)
+        deltas.reverse()
+
+        grades=[]
+        biases=[]
+        for i in range(self.num_layers - 1):#находим корректировки весов из значений на нейронах с ошибкой
+            layer_inputs = activations[i].reshape(-1,1)
+            delta = deltas[i].reshape(-1,1)
+            grade=np.dot( delta,layer_inputs.T)
+            grades.append(grade)
+            biases.append(delta.reshape(-1))
+        return [grades,biases]#возвращаем список весов для корректировки
+#тренируем нашу сеть
+    
