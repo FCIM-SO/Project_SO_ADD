@@ -104,5 +104,26 @@ class Heap {
         return heap.toArray(new Integer[0]);
     }
 
+    public static Heap mergeHeaps(Heap heap1, Heap heap2) {
+        Heap mergedHeap = new Heap();
+
+// Первая куча
+        while (!heap1.isEmpty()) {
+            mergedHeap.insert(heap1.extractMax());
+        }
+
+// Вторая куча
+        while (!heap2.isEmpty()) {
+            mergedHeap.insert(heap2.extractMax());
+        }
+
+// Создаем новую кучу, вставляя элементы в обратном порядке
+        Heap reversedHeap = new Heap();
+        while (!mergedHeap.isEmpty()) {
+            reversedHeap.insert(mergedHeap.extractMax());
+        }
+
+        return reversedHeap;
+    }
 
 }
